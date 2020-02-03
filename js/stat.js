@@ -10,7 +10,6 @@ var BAND_Y_POSITION = CLOUD_HEIGHT - (BASE_Y * 3);
 var baseMargin = BASE_X + 40;
 var columnMargin = BAND_WIDTH + 50;
 var colorRed = 'rgba(255, 0, 0, 1)';
-var randomBlue = 'rgba(30, 30, 255,' + Math.random() + ')';
 var fontData = '16px PT Mono';
 var textData = ['Ура вы победили', 'Список результатов:'];
 var colorBlack = '#000';
@@ -31,6 +30,12 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
+var getRandomColor = function (min, max) {
+  var randomColor = min + Math.random() * (max + 1 - min);
+  randomColor = Math.floor(randomColor);
+  return randomColor;
+};
+
 var textInfo = function (ctx, color, font, text, x, y) {
   ctx.fillStyle = color;
   ctx.font = font;
@@ -45,13 +50,6 @@ window.renderStatistics = function (ctx, players, times) {
   textInfo(ctx, colorBlack, fontData, textData[0], baseMargin - 20, BASE_Y * 4);
   textInfo(ctx, colorBlack, fontData, textData[1], baseMargin - 20, BASE_Y * 6);
 
-  var getColor = function (color) {
-    for (var i = 0; i < players.length; i++) {
-      color = 'rgba(0, 0, 255,' + (Math.random() + 0.10) + ')';
-    }
-    return color;
-  };
-
   var maxTime = getMaxElement(times);
 
   for (var i = 0; i < players.length; i++) {
@@ -61,7 +59,7 @@ window.renderStatistics = function (ctx, players, times) {
     if (players[i] === 'Вы') {
       ctx.fillStyle = colorRed;
     } else {
-      ctx.fillStyle = getColor(randomBlue);
+      ctx.fillStyle = 'hsl(240, 100%,' + getRandomColor(2, 100) + '%)';
     }
     ctx.fillRect(baseMargin + (columnMargin * i), BAND_Y_POSITION, BAND_WIDTH, (BAND_HEIGHT * times[i] / maxTime));
   }
