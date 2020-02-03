@@ -67,9 +67,7 @@ window.renderStatistics = function (ctx, players, times) {
   }
 };
 
-
 // var maxTime = getMaxElement(times);
-
 //   for (var i = 0; i < players.length; i++) {
 //   //   ctx.fillStyle = colorBlack;
 //   //   ctx.fillText(players[i], baseMargin + (columnMargin * i), CLOUD_HEIGHT - BASE_Y);
@@ -82,13 +80,3 @@ window.renderStatistics = function (ctx, players, times) {
 //     ctx.fillRect(baseMargin + (columnMargin * i), BAND_Y_POSITION, BAND_WIDTH, (BAND_HEIGHT * times[i] / maxTime));
 //   }
 // };
-
-
-
-
-
-
-
-
-
-
