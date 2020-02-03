@@ -66,17 +66,3 @@ window.renderStatistics = function (ctx, players, times) {
     ctx.fillRect(baseMargin + (columnMargin * i), BAND_Y_POSITION, BAND_WIDTH, (BAND_HEIGHT * times[i] / maxTime));
   }
 };
-
-// var maxTime = getMaxElement(times);
-//   for (var i = 0; i < players.length; i++) {
-//   //   ctx.fillStyle = colorBlack;
-//   //   ctx.fillText(players[i], baseMargin + (columnMargin * i), CLOUD_HEIGHT - BASE_Y);
-//   //   ctx.fillText(Math.round(times[i]), baseMargin + (columnMargin * i), BAND_Y_POSITION + (BAND_HEIGHT * times[i] / maxTime) - BASE_Y);
-//     if (players[i] === 'Вы') {
-//       ctx.fillStyle = colorRed;
-//     } else {
-//       // ctx.fillStyle = getColor(randomBlue);
-//     }
-//     ctx.fillRect(baseMargin + (columnMargin * i), BAND_Y_POSITION, BAND_WIDTH, (BAND_HEIGHT * times[i] / maxTime));
-//   }
-// };
