@@ -14,7 +14,7 @@ var fontData = '16px PT Mono';
 var textData = ['Ура вы победили', 'Список результатов:'];
 var colorBlack = '#000';
 
-var renderCLoud = function (ctx, x, y, color) {
+var drawCLoud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
@@ -36,7 +36,7 @@ var getRandomColor = function (min, max) {
   return randomColor;
 };
 
-var textInfo = function (ctx, color, font, text, x, y) {
+var drawText = function (ctx, color, font, text, x, y) {
   ctx.fillStyle = color;
   ctx.font = font;
   ctx.fillText(text, x, y);
@@ -44,11 +44,11 @@ var textInfo = function (ctx, color, font, text, x, y) {
 };
 
 window.renderStatistics = function (ctx, players, times) {
-  renderCLoud(ctx, BASE_X + 10, BASE_Y + 10, 'rgba(0, 0, 0, 0.7)');
-  renderCLoud(ctx, BASE_X, BASE_Y, '#fff');
+  drawCLoud(ctx, BASE_X + 10, BASE_Y + 10, 'rgba(0, 0, 0, 0.7)');
+  drawCLoud(ctx, BASE_X, BASE_Y, '#fff');
 
-  textInfo(ctx, colorBlack, fontData, textData[0], baseMargin - 20, BASE_Y * 4);
-  textInfo(ctx, colorBlack, fontData, textData[1], baseMargin - 20, BASE_Y * 6);
+  drawText(ctx, colorBlack, fontData, textData[0], baseMargin - 20, BASE_Y * 4);
+  drawText(ctx, colorBlack, fontData, textData[1], baseMargin - 20, BASE_Y * 6);
 
   var maxTime = getMaxElement(times);
 
