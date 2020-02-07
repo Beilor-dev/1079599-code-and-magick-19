@@ -30,12 +30,30 @@ var similarWizardTemplate = document.querySelector ('#similar-wizard-template')
 .content
 .querySelector('.setup-similar-item');
 
-// var buildWizardBlock = function(documentFragment, arrayObject) [
-//   for (var i = 0; i < arrayObject.length; i++) {
-//     documentFragment.appenChild()
-//   }
-// ]
+var fragment = document.createDocumentFragment();
+
+var wizards = [];\
+
+var drawArrayObject = function() {};
+
+var drawWizard = function (wizard) {
+  var wizardElement = similarWizardTemplate.cloneNode(true);
+
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+
+  return wizardElement;
+};
+
+var buildWizardBlock = function(documentFragment, arrayObject) {
+  for (var i = 0; i < arrayObject.length; i++) {
+    documentFragment.appenChild()
+  }
+};
 
 userDialog.classList.remove('hidden');
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
+
+buildWizardBlock(fragment, wizards);
