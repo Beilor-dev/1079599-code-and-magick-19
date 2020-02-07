@@ -21,3 +21,21 @@ var mixedNames = mixArray(WIZARD_NAMES);
 var mixedSurnames = mixArray(WIZARD_SURNAMES);
 var mixedCoats = mixArray(WIZARD_COATS);
 var mixedWizardEyes = mixArray(WIZARD_EYES);
+
+var userDialog = document.querySelector('.setup');
+
+var similarListElement = userDialog.querySelector('.setup-similar-list');
+
+var similarWizardTemplate = document.querySelector ('#similar-wizard-template')
+.content
+.querySelector('.setup-similar-item');
+
+// var buildWizardBlock = function(documentFragment, arrayObject) [
+//   for (var i = 0; i < arrayObject.length; i++) {
+//     documentFragment.appenChild()
+//   }
+// ]
+
+userDialog.classList.remove('hidden');
+
+userDialog.querySelector('.setup-similar').classList.remove('hidden');
