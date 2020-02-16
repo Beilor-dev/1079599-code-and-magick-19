@@ -79,7 +79,7 @@ var buildWizardBlock = function (documentFragment, arrayObject) {
   return similarListElement.appendChild(documentFragment);
 };
 
-var onPopupEscButtonPress = function (evt) {
+var onPopupEscapeButtonPress = function (evt) {
   if (evt.keyCode === ESCAPE_KEYCODE) {
     closePopup();
   }
@@ -87,12 +87,12 @@ var onPopupEscButtonPress = function (evt) {
 
 var openPopup = function () {
   userDialog.classList.remove('hidden');
-  document.addEventListener('keydown', onPopupEscButtonPress);
+  document.addEventListener('keydown', onPopupEscapeButtonPress);
 };
 
 var closePopup = function () {
   userDialog.classList.add('hidden');
-  document.removeEventListener('keydown', onPopupEscButtonPress);
+  document.removeEventListener('keydown', onPopupEscapeButtonPress);
 };
 
 var testInputHandler = function (evt) {
@@ -107,6 +107,14 @@ var testInputHandler = function (evt) {
     target.setCustomValidity('');
   }
   return target;
+};
+
+var inputFocusHandler = function () {
+  document.removeEventListener('keydown', onPopupEscapeButtonPress);
+};
+
+var inputBlurHandler = function () {
+  document.addEventListener('keydown', onPopupEscapeButtonPress);
 };
 
 var renderEyeColor = function () {
@@ -166,6 +174,12 @@ setupClose.addEventListener('keydown', function (evt) {
     closePopup();
   }
 });
+
+userNameInput.addEventListener('focus', inputFocusHandler);
+
+userNameInput.addEventListener('blur', inputBlurHandler);
+
+userNameInput.addEventListener('input', testInputHandler);
 
 setupPlayer.addEventListener('click', fireballandWizardColorClickHandler);
 
