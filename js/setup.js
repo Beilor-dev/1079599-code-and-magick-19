@@ -37,7 +37,7 @@ var setupPlayer = userDialog.querySelector('.setup-player');
 var fireball = userDialog.querySelector('.setup-fireball');
 var wizardCoatColor = setupPlayer.querySelector('.wizard-coat');
 var wizardEyeColor = setupPlayer.querySelector('.wizard-eyes');
-var playerCharacteristicInputData = setupPlayer.querySelector('.input');
+var playerCharacteristicInputData = setupPlayer.querySelectorAll('input');
 
 
 var similarListElement = userDialog.querySelector('.setup-similar-list');
@@ -95,6 +95,58 @@ var closePopup = function () {
   document.removeEventListener('keydown', onPopupEscButtonPress);
 };
 
+var testInputHandler = function (evt) {
+  var target = evt.target;
+  if (target.validity.valueMissing) {
+    target.setCustomValidity('Обязательное поле');
+  } else if (target.value.length < 2) {
+    target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (target.value.length > 25) {
+    target.setCustomValidity('Имя не должно превышать 25-ти символов');
+  } else {
+    target.setCustomValidity('');
+  }
+  return target;
+};
+
+var renderEyeColor = function () {
+  var renderedEyeColor = WIZARD_EYES[Math.floor(Math.random() * WIZARD_EYES.length)];
+
+  return renderedEyeColor;
+};
+
+var renderCoatColor = function () {
+  var renderedCoatColor = WIZARD_COATS[Math.floor(Math.random() * WIZARD_COATS.length)];
+
+  return renderedCoatColor;
+};
+
+
+var renderFireballColor = function () {
+  var renderedFireballColor = FIREBALL_COLORS[Math.floor(Math.random() * FIREBALL_COLORS.length)];
+
+  return renderedFireballColor;
+};
+
+
+var fireballandWizardColorClickHandler = function (evt) {
+  var targetElement = evt.target;
+
+  if (targetElement === wizardEyeColor) {
+    playerCharacteristicInputData[0].value = renderEyeColor();
+    wizardEyeColor.style.fill = playerCharacteristicInputData[0].value;
+  } else if (targetElement === wizardCoatColor) {
+    playerCharacteristicInputData[1].value = renderCoatColor();
+    wizardCoatColor.style.fill = playerCharacteristicInputData[1].value;
+  } else if (targetElement === fireball) {
+    playerCharacteristicInputData[2].value = renderFireballColor();
+    fireball.style = 'background-color:' + playerCharacteristicInputData[2].value;
+  }
+
+  return targetElement;
+};
+
+
 setupOpen.addEventListener('click', function () {
   openPopup();
 });
@@ -114,6 +166,8 @@ setupClose.addEventListener('keydown', function (evt) {
     closePopup();
   }
 });
+
+setupPlayer.addEventListener('click', fireballandWizardColorClickHandler);
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
