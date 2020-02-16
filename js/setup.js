@@ -5,6 +5,10 @@ var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', '�
 var WIZARD_COATS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
 var COUNT_WIZARDS = 4;
+var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+
+var ESCAPE_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
 var mixArray = function (array) {
   var test;
@@ -24,6 +28,17 @@ var mixedCoats = mixArray(WIZARD_COATS);
 var mixedWizardEyes = mixArray(WIZARD_EYES);
 
 var userDialog = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = document.querySelector('.setup-close');
+
+var userNameInput = userDialog.querySelector('.setup-user-name');
+
+var setupPlayer = userDialog.querySelector('.setup-player');
+var fireball = userDialog.querySelector('.setup-fireball');
+var wizardCoatColor = setupPlayer.querySelector('.wizard-coat');
+var wizardEyeColor = setupPlayer.querySelector('.wizard-eyes');
+var playerCharacteristicInputData = setupPlayer.querySelector('.input');
+
 
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 
@@ -57,7 +72,6 @@ var drawWizard = function (wizard) {
   return wizardElement;
 };
 
-
 var buildWizardBlock = function (documentFragment, arrayObject) {
   for (var i = 0; i < arrayObject.length; i++) {
     documentFragment.appendChild(drawWizard(arrayObject[i]));
@@ -65,7 +79,41 @@ var buildWizardBlock = function (documentFragment, arrayObject) {
   return similarListElement.appendChild(documentFragment);
 };
 
-userDialog.classList.remove('hidden');
+var onPopupEscButtonPress = function (evt) {
+  if (evt.keyCode === ESCAPE_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  userDialog.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscButtonPress);
+};
+
+var closePopup = function () {
+  userDialog.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscButtonPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
