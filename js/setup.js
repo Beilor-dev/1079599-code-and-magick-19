@@ -34,9 +34,9 @@ var setupClose = document.querySelector('.setup-close');
 var userNameInput = userDialog.querySelector('.setup-user-name');
 
 var setupPlayer = userDialog.querySelector('.setup-player');
-var fireball = userDialog.querySelector('.setup-fireball');
-var wizardCoatColor = setupPlayer.querySelector('.wizard-coat');
-var wizardEyeColor = setupPlayer.querySelector('.wizard-eyes');
+// var fireball = userDialog.querySelector('.setup-fireball');
+// var wizardCoatColor = setupPlayer.querySelector('.wizard-coat');
+// var wizardEyeColor = setupPlayer.querySelector('.wizard-eyes');
 var playerCharacteristicInputData = setupPlayer.querySelectorAll('input');
 
 
@@ -147,7 +147,7 @@ var onCoatClick = function () {
 var wizardEyes = document.querySelector('.setup-wizard .wizard-eyes ');
 var wizardEyesInfo = document.querySelector('input[name=eyes-color]');
 var onEyesClick = function () {
-  var nextColor = renderCoatColor(WIZARD_EYES, wizardEyesInfo.value);
+  var nextColor = renderEyeColor (WIZARD_EYES, wizardEyesInfo.value);
   wizardEyes.setAttribute('style', 'fill: ' + nextColor);
   wizardEyesInfo.setAttribute('value', nextColor);
 };
