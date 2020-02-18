@@ -117,6 +117,7 @@ var inputBlurHandler = function () {
   document.addEventListener('keydown', onPopupEscapeButtonPress);
 };
 
+// Блок изменений цвета мантии, глаз и фаерболла по нажатию
 var renderEyeColor = function () {
   var renderedEyeColor = WIZARD_EYES[Math.floor(Math.random() * WIZARD_EYES.length)];
 
@@ -129,32 +130,51 @@ var renderCoatColor = function () {
   return renderedCoatColor;
 };
 
-
 var renderFireballColor = function () {
   var renderedFireballColor = FIREBALL_COLORS[Math.floor(Math.random() * FIREBALL_COLORS.length)];
 
   return renderedFireballColor;
 };
 
-
-var fireballandWizardColorClickHandler = function (evt) {
-  var targetElement = evt.target;
-
-  if (targetElement === wizardEyeColor) {
-    playerCharacteristicInputData[0].value = renderEyeColor();
-    wizardEyeColor.style.fill = playerCharacteristicInputData[0].value;
-  } else if (targetElement === wizardCoatColor) {
-    playerCharacteristicInputData[1].value = renderCoatColor();
-    wizardCoatColor.style.fill = playerCharacteristicInputData[1].value;
-  } else if (targetElement === fireball) {
-    playerCharacteristicInputData[2].value = renderFireballColor();
-    fireball.style = 'background-color:' + playerCharacteristicInputData[2].value;
-  }
-
-  return targetElement;
+var wizardCoat = document.querySelector('.setup-wizard .wizard-coat ');
+var wizardCoatInfo = document.querySelector('input[name=coat-color]');
+var onCoatClick = function () {
+  var nextColor = renderCoatColor(WIZARD_COATS, wizardCoatInfo.value);
+  wizardCoat.setAttribute('style', 'fill: ' + nextColor);
+  wizardCoatInfo.setAttribute('value', nextColor);
 };
 
+var wizardEyes = document.querySelector('.setup-wizard .wizard-eyes ');
+var wizardEyesInfo = document.querySelector('input[name=eyes-color]');
+var onEyesClick = function () {
+  var nextColor = renderCoatColor(WIZARD_EYES, wizardEyesInfo.value);
+  wizardEyes.setAttribute('style', 'fill: ' + nextColor);
+  wizardEyesInfo.setAttribute('value', nextColor);
+};
 
+var wizardFireball = document.querySelector('.setup-fireball-wrap');
+var wizardFireballInfo = wizardFireball.querySelector('input');
+var onFireballClick = function () {
+  wizardFireballInfo.setAttribute('value', renderFireballColor(FIREBALL_COLORS, wizardFireballInfo.value));
+  wizardFireball.setAttribute('style', 'background-color:' + wizardFireballInfo.value);
+};
+
+// var fireballandWizardColorClickHandler = function (evt) {
+//   var targetElement = evt.target;
+
+//   if (targetElement === wizardEyeColor) {
+//     playerCharacteristicInputData[0].value = renderEyeColor();
+//     wizardEyeColor.style.fill = playerCharacteristicInputData[0].value;
+//   } else if (targetElement === wizardCoatColor) {
+//     // playerCharacteristicInputData[1].value = renderCoatColor();
+//     // wizardCoatColor.style.fill = playerCharacteristicInputData[1].value;
+//   } else if (targetElement === fireball) {
+//     playerCharacteristicInputData[2].value = renderFireballColor();
+//     fireball.style = 'background-color:' + playerCharacteristicInputData[2].value;
+//   }
+
+//   return targetElement;
+// };
 setupOpen.addEventListener('click', function () {
   openPopup();
 });
@@ -181,7 +201,10 @@ userNameInput.addEventListener('blur', inputBlurHandler);
 
 userNameInput.addEventListener('input', testInputHandler);
 
-setupPlayer.addEventListener('click', fireballandWizardColorClickHandler);
+// setupPlayer.addEventListener('click', fireballandWizardColorClickHandler);
+wizardCoat.addEventListener('click', onCoatClick);
+wizardEyes.addEventListener('click', onEyesClick);
+wizardFireball.addEventListener('click', onFireballClick);
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
